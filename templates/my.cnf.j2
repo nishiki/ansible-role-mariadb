@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+{% for section, options in mariadb_full_config.iteritems() %}
+[{{section}}]
+{% for option, value in options.iteritems() %}
+{{ option }}{% if not value is sameas true %} = {{ value }}{% endif %}
+
+{% endfor %}
+{% endfor %}

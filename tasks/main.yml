@@ -1,0 +1,64 @@
+---
+- name: install package
+  package:
+    name: mariadb-server
+  retries: 2
+  register: result
+  until: result is succeeded
+  tags: mariadb
+
+- name: copy configuration file
+  template:
+    src: my.cnf.j2
+    dest: /etc/mysql/mariadb.cnf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart mariadb
+  tags: mariadb
+
+- name: enable and start the service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  tags: mariadb
+
+- name: remove anonymous users
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+    login_user: '{{ mariadb_user }}'
+    login_password: '{{ mariadb_password }}'
+  run_once: true
+  no_log: true
+  when: mariadb_master
+  tags: mariadb
+
+- name: manage users
+  mysql_user:
+    name: '{{ item.name }}'
+    host: '{{ item.host }}'
+    password: '{{ item.password }}'
+    priv: '{{ item.privileges|default("")|join(",") }}'
+    state: '{{ item.state|default("present") }}'
+    login_user: '{{ mariadb_user }}'
+    login_password: '{{ mariadb_password }}'
+  loop: '{{ mariadb_users }}'
+  run_once: true
+  no_log: true
+  when: mariadb_master
+  tags: mariadb
+
+- name: manage databases
+  mysql_db:
+    name: '{{ item.name }}'
+    state: '{{ item.state|default("present") }}'
+    login_user: '{{ mariadb_user }}'
+    login_password: '{{ mariadb_password }}'
+  loop: '{{ mariadb_databases }}'
+  run_once: true
+  no_log: true
+  when: mariadb_master
+  tags: mariadb

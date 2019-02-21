@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    mariadb_autorestart: yes
+    mariadb_master: yes
+    mariadb_config:
+      client-server: {}
+      mysqld:
+        server-id: 5
+        log-bin: mysql-bin
+    mariadb_databases:
+      - name: test
+    mariadb_users:
+      - name: toto
+        host: '%'
+        password: test
+        privileges:
+          - 'test.*:ALL'
+
+  roles:
+    - ansible-role-mariadb
