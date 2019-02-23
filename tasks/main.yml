@@ -1,7 +1,11 @@
 ---
 - name: install package
   package:
-    name: mariadb-server
+    name: '{{ packages }}'
+  vars:
+    packages:
+      - mariadb-server
+      - python-mysqldb
   retries: 2
   register: result
   until: result is succeeded

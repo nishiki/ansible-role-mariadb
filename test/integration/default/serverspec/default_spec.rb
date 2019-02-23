@@ -7,8 +7,13 @@ puts '================================'
 puts %x(ansible --version)
 puts '================================'
 
-describe package('mariadb-server') do
-  it { should be_installed }
+%w[
+  mariadb-server
+  python-mysqldb
+].each do |name|
+  describe package(name) do
+    it { should be_installed }
+  end
 end
 
 describe file('/etc/mysql/mariadb.cnf') do
