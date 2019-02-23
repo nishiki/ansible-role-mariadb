@@ -1,5 +1,5 @@
 # Ansible role: MariaDB
-[![Version](https://img.shields.io/badge/latest_version-1.0.0_dev-green.svg)](https://git.yaegashi.fr/nishiki/ansible-role-mariadb/releases)
+[![Version](https://img.shields.io/badge/latest_version-1.0.0-green.svg)](https://git.yaegashi.fr/nishiki/ansible-role-mariadb/releases)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://git.yaegashi.fr/nishiki/ansible-role-mariadb/src/branch/master/LICENSE)
 
 Install and configure MariaDB
