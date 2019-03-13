@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+- fix: add client-server option in default configuration
 - fix: install python-mysqldb package
 
 ## [v1.0.0] - 2019-02-23

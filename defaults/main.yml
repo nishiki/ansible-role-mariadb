@@ -7,6 +7,7 @@ mariadb_users: []
 mariadb_databases: []
 mariadb_config: {}
 mariadb_default_config:
+  client-server: {}
   client:
     default-character-set: utf8mb4
   mysql:
