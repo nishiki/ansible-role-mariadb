@@ -3,7 +3,7 @@ galaxy_info:
   role_name: mariadb
   author: Adrien Waksberg
   company: Adrien Waksberg
-  description: Install and configure mysql
+  description: Install and configure mariadb
   license: Apache2
   min_ansible_version: 2.7
 
@@ -16,5 +16,6 @@ galaxy_info:
     - database
     - sql
     - mysql
+    - mariadb
 
 dependencies: []
