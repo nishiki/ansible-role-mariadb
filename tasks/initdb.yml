@@ -59,5 +59,3 @@
     - '{{ ansible_nodename }}'
   no_log: true
   tags: mariadb
-
-
