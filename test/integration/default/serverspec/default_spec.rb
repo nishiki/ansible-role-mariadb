@@ -16,6 +16,13 @@ puts '================================'
   end
 end
 
+describe file('/opt/mariadb') do
+  it { should be_directory }
+  it { should be_mode 750 }
+  it { should be_owned_by 'mysql' }
+  it { should be_grouped_into 'root' }
+end
+
 describe file('/etc/mysql/mariadb.cnf') do
   it { should be_file }
   it { should be_mode 644 }
@@ -33,24 +40,24 @@ describe port(3306) do
   it { should be_listening }
 end
 
-describe command('mysql -u root -e "show databases"') do
+describe command('mysql -uroot -psecret -e "show databases"') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should contain 'test' }
 end
 
-describe command('mysql -u root -e "select user, host from mysql.user"') do
+describe command('mysql -uroot -psecret -e "select user, host from mysql.user"') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should contain(/toto.*%/) }
 end
 
-describe command('mysql -u root -e "show grants for toto@\'%\'"') do
+describe command('mysql -uroot -psecret -e "show grants for toto@\'%\'"') do
   its(:exit_status) { should eq 0 }
   its(:stdout) do
     should contain "GRANT ALL PRIVILEGES ON `test`.* TO 'toto'@'%'"
   end
 end
 
-describe command('mysql -u root -e "show variables where variable_name = \'log_bin\'"') do
+describe command('mysql -uroot -psecret -e "show variables where variable_name = \'log_bin\'"') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should contain 'ON' }
 end

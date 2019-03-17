@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+- feat: install database if datadir doesn't exist
 
 ## [v1.0.1] - 2019-03-16
 - fix: add client-server option in default configuration

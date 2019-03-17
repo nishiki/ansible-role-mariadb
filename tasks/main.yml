@@ -21,6 +21,15 @@
   notify: restart mariadb
   tags: mariadb
 
+- name: check if datadir exist
+  stat:
+    path: '{{ mariadb_full_config.mysqld.datadir }}'
+  register: st
+  tags: mariadb
+
+- import_tasks: initdb.yml
+  when: not st.stat.exists
+
 - name: enable and start the service
   service:
     name: mysql

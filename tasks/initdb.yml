@@ -1,0 +1,37 @@
+---
+- name: create the data directory
+  file:
+    path: '{{ mariadb_full_config.mysqld.datadir }}'
+    owner: '{{ mariadb_full_config.mysqld.user }}'
+    group: root
+    mode: 0750
+    state: directory
+  tags: mariadb
+
+- name: initialize database
+  command:
+  args:
+    argv:
+      - mysql_install_db
+      - '--datadir={{ mariadb_full_config.mysqld.datadir }}'
+      - '--user={{ mariadb_full_config.mysqld.user }}'
+      - '--skip-name-resolve'
+      - '--no-defaults'
+  when: True
+  tags: mariadb
+
+- name: start mariadb
+  systemd:
+    name: mysql
+    state: started
+  tags: mariadb
+
+- name: wait mysql start
+  pause:
+    seconds: 5
+  tags: mariadb
+
+- name: set root password
+  command: 'mysqladmin -u root password {{ mariadb_password }}'
+  when: True
+  tags: mariadb
