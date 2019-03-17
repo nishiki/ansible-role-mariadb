@@ -35,3 +35,29 @@
   command: 'mysqladmin -u root password {{ mariadb_password }}'
   when: True
   tags: mariadb
+
+- name: remove anonymous users
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+    login_user: '{{ mariadb_user }}'
+    login_password: '{{ mariadb_password }}'
+  no_log: true
+  tags: mariadb
+
+- name: remove root user without password
+  mysql_user:
+    name: root
+    host: '{{ item }}'
+    state: absent
+    login_user: '{{ mariadb_user }}'
+    login_password: '{{ mariadb_password }}'
+  loop:
+    - 127.0.0.1
+    - '::1'
+    - '{{ ansible_nodename }}'
+  no_log: true
+  tags: mariadb
+
+

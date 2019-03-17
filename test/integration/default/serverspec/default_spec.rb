@@ -45,9 +45,14 @@ describe command('mysql -uroot -psecret -e "show databases"') do
   its(:stdout) { should contain 'test' }
 end
 
-describe command('mysql -uroot -psecret -e "select user, host from mysql.user"') do
+describe command('mysql -uroot -psecret -e "select user, host, password from mysql.user"') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should contain(/toto.*%/) }
+end
+
+describe command('mysql -uroot -psecret -e "select count(*) from mysql.user where user=\'root\'"') do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should contain('1') }
 end
 
 describe command('mysql -uroot -psecret -e "show grants for toto@\'%\'"') do

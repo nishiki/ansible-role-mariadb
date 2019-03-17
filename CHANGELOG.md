@@ -5,6 +5,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 - breaking: remove support for ansible 2.5
+- feat: remove unused users in init
 - feat: install database if datadir doesn't exist
 
 ## [v1.0.1] - 2019-03-16

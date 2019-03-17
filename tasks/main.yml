@@ -37,18 +37,6 @@
     enabled: yes
   tags: mariadb
 
-- name: remove anonymous users
-  mysql_user:
-    name: ''
-    host_all: yes
-    state: absent
-    login_user: '{{ mariadb_user }}'
-    login_password: '{{ mariadb_password }}'
-  run_once: true
-  no_log: true
-  when: mariadb_master
-  tags: mariadb
-
 - name: manage users
   mysql_user:
     name: '{{ item.name }}'
