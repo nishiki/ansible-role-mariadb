@@ -23,7 +23,7 @@ describe file('/opt/mariadb') do
   it { should be_grouped_into 'root' }
 end
 
-describe file('/etc/mysql/mariadb.cnf') do
+describe file('/etc/mysql/my.cnf') do
   it { should be_file }
   it { should be_mode 644 }
   it { should be_owned_by 'root' }

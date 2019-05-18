@@ -1,4 +1,10 @@
 ---
+mariadb_use_official_repository: yes
+mariadb_branch: 10.3
+mariadb_repository: |
+  deb http://mariadb.mirrors.ovh.net/MariaDB/repo/{{ mariadb_branch }}/debian {{ ansible_distribution_release }} main
+mariadb_repository_key_id: '0xF1656F24C74CD1D8'
+mariadb_repository_key_server: keyserver.ubuntu.com
 mariadb_user: root
 mariadb_password: secret
 mariadb_master: no
