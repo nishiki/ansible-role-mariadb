@@ -1,4 +1,7 @@
 ---
+- import_tasks: repo.yml
+  when: mariadb_use_official_repository|bool
+
 - name: install package
   package:
     name: '{{ packages }}'
@@ -14,7 +17,7 @@
 - name: copy configuration file
   template:
     src: my.cnf.j2
-    dest: /etc/mysql/mariadb.cnf
+    dest: /etc/mysql/my.cnf
     owner: root
     group: root
     mode: 0644
