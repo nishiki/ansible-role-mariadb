@@ -3,4 +3,4 @@
   service:
     name: mysql
     state: restarted
-  when: mariadb_autorestart
+  when: mariadb_autorestart|bool

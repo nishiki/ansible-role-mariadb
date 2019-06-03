@@ -52,7 +52,7 @@
   loop: '{{ mariadb_users }}'
   run_once: true
   no_log: true
-  when: mariadb_master
+  when: mariadb_master|bool
   tags: mariadb
 
 - name: manage databases
@@ -64,5 +64,5 @@
   loop: '{{ mariadb_databases }}'
   run_once: true
   no_log: true
-  when: mariadb_master
+  when: mariadb_master|bool
   tags: mariadb
