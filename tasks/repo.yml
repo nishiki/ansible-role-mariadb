@@ -3,6 +3,9 @@
   apt_key:
     keyserver: '{{ mariadb_repository_key_server }}'
     id: '{{ mariadb_repository_key_id }}'
+  retries: 2
+  register: result
+  until: result is succeeded
   tags: mariadb
 
 - name: add official repo
