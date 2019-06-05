@@ -5,6 +5,8 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+## [v2.0.0] - 2019-06-05
+
 - breaking: remove support for ansible < 2.8
 - feat: add official repository
 - feat: remove unused users in init
