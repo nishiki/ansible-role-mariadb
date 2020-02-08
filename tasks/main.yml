@@ -9,6 +9,7 @@
     packages:
       - mariadb-server
       - python-mysqldb
+      - python3-mysqldb
   retries: 2
   register: result
   until: result is succeeded
