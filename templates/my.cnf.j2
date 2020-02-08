@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 
-{% for section, options in mariadb_full_config.iteritems() %}
+{% for section, options in mariadb_full_config.items() %}
 [{{section}}]
-{% for option, value in options.iteritems() %}
+{% for option, value in options.items() %}
 {{ option }}{% if not value is sameas true %} = {{ value }}{% endif %}
 
 {% endfor %}

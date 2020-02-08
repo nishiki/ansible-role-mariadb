@@ -15,13 +15,13 @@ provisioner:
   ansible_inventory: ./test/integration/inventory
 
 platforms:
-  - name: debian-9
+  - name: debian
     driver_config:
-      image: "nishiki/debian9:ansible-<%= ENV['ANSIBLE_VERSION'] ? ENV['ANSIBLE_VERSION'] : '2.8' %>"
+      image: "nishiki/debian<%= ENV['DEBIAN_VERSION'] ? ENV['DEBIAN_VERSION'] : '10' %>:ansible-<%= ENV['ANSIBLE_VERSION'] ? ENV['ANSIBLE_VERSION'] : '2.9' %>"
       command: /bin/systemd
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      security_opt: seccomp=unconfined
+      privileged: cap-add=SYS_ADMIN
 
 suites:
   - name: default

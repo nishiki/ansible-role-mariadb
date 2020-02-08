@@ -8,8 +8,8 @@ Install and configure MariaDB
 
 ## Requirements
 
-* Ansible >= 2.6
-* Debian Stretch
+* Ansible >= 2.8
+* Debian Stretch and Buster
 
 ## Role variables
 
