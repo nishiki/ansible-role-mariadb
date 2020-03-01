@@ -1,6 +1,6 @@
 ---
-- hosts: localhost
-  connection: local
+- name: Converge
+  hosts: all
   vars:
     mariadb_autorestart: yes
     mariadb_master: yes
@@ -18,6 +18,5 @@
         password: test
         privileges:
           - 'test.*:ALL'
-
   roles:
     - ansible-role-mariadb

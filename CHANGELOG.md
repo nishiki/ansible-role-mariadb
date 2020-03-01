@@ -5,6 +5,10 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+### Changed
+
+- test: replace kitchen to molecule
+
 ## [v2.0.0] - 2019-06-05
 
 - breaking: remove support for ansible < 2.8
