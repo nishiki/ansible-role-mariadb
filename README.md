@@ -13,30 +13,56 @@ Install and configure MariaDB
 
 ## Role variables
 
-* `mariadb_use_official_repository` - use the official repository (default: `yes`)
-* `mariadb_branch` - the branch version to install (default: `10.3`)
-* `mariadb_user` - login to connect on mariadb (default: `root`)
-* `mariadb_password` - password to connect on mariadb (default: `secret`)
-* `mariadb_master` - the server is master (default: `no`)
-* `mariadb_autorestart` - restart mariadb when the config change (default: `no`)
-* `mariadb_users` - array with the users to manage
+| Name                            | Type  | Required |Default | Comment                                |
+|---------------------------------|-------|----------|--------|----------------------------------------|
+| mariadb_use_official_repository | bool  | no       | true   | use the official repository            |
+| mariadb_branch                  | str   | no       | 10.3   | the branch version to install          |
+| mariadb_user                    | str   | no       | root   | login to connect on mariadb            |
+| mariadb_password                | str   | no       | secret | password to connect on mariadb         |
+| mariadb_master                  | bool  | no       | false  | the server is master                   |
+| mariadb_autorestart             | bool  | no       | false  | restart mariadb when the config change |
+| mariadb_users                   | array | no       |        | the users to manage                    |
+| mariadb_databases               | array | no       |        | the databases to manage                |
+| mariadb_config                  | hash  | no       |        | extra options for configuration        |
+
+### mariadb_users
+
+| Name       | Type  | Required |Default  | Comment                                                   |
+|------------|-------|----------|---------|-----------------------------------------------------------|
+| name       | str   | yes      |         | the username                                              |
+| host       | str   | yes      |         | the mysql user host                                       |
+| password   | str   | yes      |         | the user password                                         |
+| privileges | array | no       |         | the privileges with this form `database.*:SELECT,UPDATE`) |
+| state      | str   | no       | present | if state is `absent` the user is deleted                  |
+
+Example:
 
 ```
 - name: johndoe
+  host: '%'
   password: supersecret
   privileges:
     - 'database.*:SELECT,UPDATE'
   state: present
 ```
 
-* `mariadb_databases` -  array with the databases to manage
+### mariadb_databases
+
+| Name       | Type  | Required |Default  | Comment                                                   |
+|------------|-------|----------|---------|-----------------------------------------------------------|
+| name       | str   | yes      |         | the dabase name                                           |
+| state      | str   | no       | present | if state is `absent` the database is deleted              |
+
+Example:
 
 ```
 - name: superprogram
   state: present
 ```
 
-* `mariadb_config` -  hash with mariadb configuration
+### mariadb_config
+
+Example:
 
 ```
   mysqld:
@@ -48,6 +74,19 @@ Install and configure MariaDB
 
 ```
 - hosts: server
+  vars:
+    mariadb_password: supersecret
+    mariadb_users:
+      - name: johndoe
+        host: '%'
+        password: usersecret
+        privileges:
+          - 'myappli.*:ALL'
+    mariadb_databases:
+      - myappli
+    mariadb_config:  
+      server-id: 1
+      bind-address: 0.0.0.0
   roles:
     - mariadb
 ```
