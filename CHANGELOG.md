@@ -5,9 +5,11 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+## [v2.0.1] - 2020-03-28
+
 ### Changed
 
-- feat: remove default value for mariadb_password
+- fix: remove default value for mariadb_password
 - test: replace kitchen to molecule
 
 ## [v2.0.0] - 2019-06-05
