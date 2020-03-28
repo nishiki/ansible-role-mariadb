@@ -18,7 +18,7 @@ Install and configure MariaDB
 | mariadb_use_official_repository | bool  | no       | true   | use the official repository            |
 | mariadb_branch                  | str   | no       | 10.3   | the branch version to install          |
 | mariadb_user                    | str   | no       | root   | login to connect on mariadb            |
-| mariadb_password                | str   | no       | secret | password to connect on mariadb         |
+| mariadb_password                | str   | yes      |        | password to connect on mariadb         |
 | mariadb_master                  | bool  | no       | false  | the server is master                   |
 | mariadb_autorestart             | bool  | no       | false  | restart mariadb when the config change |
 | mariadb_users                   | array | no       |        | the users to manage                    |

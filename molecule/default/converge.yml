@@ -2,6 +2,7 @@
 - name: Converge
   hosts: all
   vars:
+    mariadb_password: secret
     mariadb_autorestart: yes
     mariadb_master: yes
     mariadb_config:

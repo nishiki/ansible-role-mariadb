@@ -6,7 +6,6 @@ mariadb_repository: |
 mariadb_repository_key_id: '0xF1656F24C74CD1D8'
 mariadb_repository_key_server: keyserver.ubuntu.com
 mariadb_user: root
-mariadb_password: secret
 mariadb_master: no
 mariadb_autorestart: no
 mariadb_users: []
